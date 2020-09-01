@@ -1,0 +1,24 @@
+leetcode-881. 救生艇  https://leetcode-cn.com/problems/boats-to-save-people/
+解题思路：每次选择最大的与最小的配对，比如（a,b,c,d）,如果(b,d)可以配对，则(a,c)也一定可以配对
+时间复杂对:
+  Time:O(nlogn)，n为数组长度，排序的时间，除此之外只需要遍历数组一遍，直接贪心即可
+  Space:O(1)，不算重量数组，排序为原地的情况下
+ 
+代码:
+
+    int numRescueBoats(vector<int>& people, int limit) {
+        sort(people.begin(),people.end());
+        int ans=0,sum=people[0];
+        int l=0,r=people.size()-1;
+        while(l<=r){
+            if(people[l]+people[r]<=limit){
+                l++;
+                r--;
+            }
+            else{
+                r--;
+            }
+            ans++;
+        }
+        return ans;
+    }
